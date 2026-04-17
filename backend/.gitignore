@@ -1,0 +1,9 @@
+/node_modules
+/logs
+/build
+/dist
+
+.env
+
+# Generated data — run `npm run fetch-data` to create it
+/data/quran.json

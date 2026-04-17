@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  color: #0e1d30;
+  background-color: #faf8f3;
+  background-image: radial-gradient(
+    ellipse at top,
+    rgba(201, 169, 97, 0.06) 0%,
+    transparent 60%
+  );
+}
+
+/* Decorative gold divider line */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(201, 169, 97, 0.4),
+    rgba(201, 169, 97, 0.8),
+    rgba(201, 169, 97, 0.4),
+    transparent
+  );
+}
+
+/* Range slider — updated to gold */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  height: 4px;
+  background: #ead590;
+  border-radius: 9999px;
+}
+
+input[type='range']::-moz-range-track {
+  height: 4px;
+  background: #ead590;
+  border-radius: 9999px;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 18px;
+  width: 18px;
+  border-radius: 9999px;
+  background: #1e3a5f;
+  margin-top: -7px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+input[type='range']::-moz-range-thumb {
+  height: 18px;
+  width: 18px;
+  border-radius: 9999px;
+  background: #1e3a5f;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
