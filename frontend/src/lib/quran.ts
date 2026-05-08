@@ -1,51 +1,49 @@
 import type { Surah, SurahMeta, SearchResult } from './types';
+import quranData from '@/data/quran.json';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const surahs: Surah[] = (quranData as { surahs: Surah[] }).surahs;
 
-interface ApiResponse<T> {
-  status: boolean;
-  message: string;
-  data: T;
+// Pre-compute global ayah offsets once
+const surahStartNumbers: Record<number, number> = {};
+let running = 1;
+for (const s of surahs) {
+  surahStartNumbers[s.number] = running;
+  running += s.numberOfAyahs;
 }
 
-async function apiGet<T>(
-  path: string,
-  init?: RequestInit
-): Promise<T> {
-  const res = await fetch(`${API_URL}${path}`, {
-    // Cache aggressively — Quran data is immutable
-    next: { revalidate: false },
-    ...init,
-  });
-  if (!res.ok) {
-    throw new Error(`API error ${res.status}: ${path}`);
-  }
-  const json = (await res.json()) as ApiResponse<T>;
-  if (!json.status) {
-    throw new Error(json.message || 'API returned error');
-  }
-  return json.data;
+export function getGlobalAyahNumber(surahNumber: number, ayahNumberInSurah: number): number {
+  return (surahStartNumbers[surahNumber] ?? 1) + ayahNumberInSurah - 1;
 }
 
 export async function getAllSurahs(): Promise<SurahMeta[]> {
-  return apiGet<SurahMeta[]>('/api/v1/quran/surahs');
+  return surahs.map(({ ayahs, ...meta }) => meta);
 }
 
 export async function getSurahById(id: number): Promise<Surah | null> {
-  try {
-    return await apiGet<Surah>(`/api/v1/quran/surahs/${id}`);
-  } catch {
-    return null;
-  }
+  return surahs.find((s) => s.number === id) ?? null;
 }
 
-export async function searchAyahs(query: string): Promise<SearchResult[]> {
-  const q = query.trim();
+export async function searchAyahs(query: string, limit = 100): Promise<SearchResult[]> {
+  const q = query.toLowerCase().trim();
   if (q.length < 2) return [];
-  const data = await apiGet<{ results: SearchResult[]; count: number }>(
-    `/api/v1/quran/search?q=${encodeURIComponent(q)}`,
-    // Search is dynamic — don't cache on the client
-    { cache: 'no-store' }
-  );
-  return data.results;
+
+  const results: SearchResult[] = [];
+  for (const surah of surahs) {
+    for (const ayah of surah.ayahs) {
+      if (ayah.translation.toLowerCase().includes(q) || ayah.text.includes(query)) {
+        results.push({
+          surahNumber: surah.number,
+          surahName: surah.name,
+          surahEnglishName: surah.englishName,
+          surahEnglishNameTranslation: surah.englishNameTranslation,
+          ayahNumber: ayah.numberInSurah,
+          ayahGlobalNumber: getGlobalAyahNumber(surah.number, ayah.numberInSurah),
+          text: ayah.text,
+          translation: ayah.translation,
+        });
+        if (results.length >= limit) return results;
+      }
+    }
+  }
+  return results;
 }

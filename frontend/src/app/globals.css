@@ -1,72 +1,110 @@
+/* Google Fonts — loaded at runtime */
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
+@layer base {
+  :root {
+    --bg-primary: #f8f5ef;
+    --bg-secondary: #f0ebe0;
+    --bg-card: #ffffff;
+    --bg-sidebar: #f4efe4;
+    --text-primary: #1a1a2e;
+    --text-secondary: #4a4a6a;
+    --text-muted: #8888aa;
+    --border-color: #e0d9cc;
+    --accent: #2b7a4b;
+    --accent-light: #3d9e64;
+    --accent-glow: rgba(43, 122, 75, 0.15);
+    --gold: #c9a44a;
+    --gold-light: #e8c46a;
+    --icon-bg: #eef7f2;
+    --active-bg: #2b7a4b;
+    --active-text: #ffffff;
+    --font-amiri: 'Amiri', serif;
+    --font-scheherazade: 'Scheherazade New', serif;
+    --font-noto-naskh: 'Noto Naskh Arabic', serif;
+    --font-ibm-plex: 'IBM Plex Sans', sans-serif;
+  }
+
+  .dark {
+    --bg-primary: #0f1117;
+    --bg-secondary: #161b22;
+    --bg-card: #1a2030;
+    --bg-sidebar: #111318;
+    --text-primary: #e8e8f0;
+    --text-secondary: #9090b0;
+    --text-muted: #606080;
+    --border-color: #2a2d3a;
+    --accent: #3fb068;
+    --accent-light: #52cc7a;
+    --accent-glow: rgba(63, 176, 104, 0.15);
+    --gold: #d4aa55;
+    --gold-light: #e8c46a;
+    --icon-bg: #1e2535;
+    --active-bg: #3fb068;
+    --active-text: #0f1117;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-ibm-plex), system-ui, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
 }
 
-body {
-  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
-  color: #0e1d30;
-  background-color: #faf8f3;
-  background-image: radial-gradient(
-    ellipse at top,
-    rgba(201, 169, 97, 0.06) 0%,
-    transparent 60%
-  );
+/* Font utility classes */
+.font-amiri { font-family: var(--font-amiri) !important; }
+.font-scheherazade { font-family: var(--font-scheherazade) !important; }
+.font-noto-naskh { font-family: var(--font-noto-naskh) !important; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* Range sliders */
+input[type='range'] { -webkit-appearance: none; appearance: none; background: transparent; width: 100%; }
+input[type='range']::-webkit-slider-runnable-track { height: 4px; background: var(--border-color); border-radius: 9999px; }
+input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 9999px; background: var(--accent); margin-top: -6px; cursor: pointer; }
+input[type='range']::-moz-range-track { height: 4px; background: var(--border-color); border-radius: 9999px; }
+input[type='range']::-moz-range-thumb { height: 16px; width: 16px; border-radius: 9999px; background: var(--accent); border: none; cursor: pointer; }
+
+/* Ayah card hover */
+.ayah-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-glow), 0 4px 24px rgba(0, 0, 0, 0.12);
 }
 
-/* Decorative gold divider line */
-.gold-rule {
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    rgba(201, 169, 97, 0.4),
-    rgba(201, 169, 97, 0.8),
-    rgba(201, 169, 97, 0.4),
-    transparent
-  );
+/* Playing pulse */
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 var(--accent-glow); }
+  70%  { box-shadow: 0 0 0 8px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.playing-pulse { animation: pulse-ring 1.5s ease-out infinite; }
+
+/* Bismillah */
+.bismillah-text {
+  font-family: var(--font-amiri);
+  direction: rtl;
+  text-align: center;
+  font-size: 2rem;
+  color: var(--gold);
+  line-height: 2;
 }
 
-/* Range slider — updated to gold */
-input[type='range'] {
-  -webkit-appearance: none;
-  appearance: none;
-  background: transparent;
+/* Fade-in */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
-input[type='range']::-webkit-slider-runnable-track {
-  height: 4px;
-  background: #ead590;
-  border-radius: 9999px;
-}
-
-input[type='range']::-moz-range-track {
-  height: 4px;
-  background: #ead590;
-  border-radius: 9999px;
-}
-
-input[type='range']::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  height: 18px;
-  width: 18px;
-  border-radius: 9999px;
-  background: #1e3a5f;
-  margin-top: -7px;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
-}
-
-input[type='range']::-moz-range-thumb {
-  height: 18px;
-  width: 18px;
-  border-radius: 9999px;
-  background: #1e3a5f;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
-}
+.animate-fadeIn { animation: fadeIn 0.3s ease-out both; }

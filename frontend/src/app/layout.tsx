@@ -1,67 +1,36 @@
-import type { Metadata, Viewport } from 'next';
-import { Inter, Amiri, Scheherazade_New, Noto_Naskh_Arabic } from 'next/font/google';
-import { SettingsProvider } from '@/context/SettingsContext';
-import Header from '@/components/Header';
-import SettingsSidebar from '@/components/SettingsSidebar';
+import type { Metadata } from 'next';
 import './globals.css';
+import { SettingsProvider } from '@/context/SettingsContext';
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-});
 
-const amiri = Amiri({
-  weight: ['400', '700'],
-  subsets: ['arabic'],
-  display: 'swap',
-  variable: '--font-amiri',
-});
-
-const scheherazade = Scheherazade_New({
-  weight: ['400', '700'],
-  subsets: ['arabic'],
-  display: 'swap',
-  variable: '--font-scheherazade',
-});
-
-const notoNaskh = Noto_Naskh_Arabic({
-  subsets: ['arabic'],
-  display: 'swap',
-  variable: '--font-noto-naskh',
-});
+import { getAllSurahs } from '@/lib/quran';
+import type { SurahMeta } from '@/lib/types';
+import { SurahSidebar } from '@/components/SurahSidebar';
+import { SettingsPanel } from '@/components/SettingsPanel';
+import { SearchModal } from '@/components/SearchModal';
+import { IconSidebar } from '@/components/IconSidebar';
 
 export const metadata: Metadata = {
-  title: 'Al-Quran Kareem',
-  description:
-    'Read, search, and explore the Holy Quran — 114 surahs with Arabic text and English translation.',
+  title: 'Quran — Read & Listen',
+  description: 'Read and listen to the Holy Quran with English translation',
 };
 
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-};
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const surahs: SurahMeta[] = await getAllSurahs();
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.variable} ${amiri.variable} ${scheherazade.variable} ${notoNaskh.variable} antialiased min-h-screen`}
-      >
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body>
         <SettingsProvider>
-          <Header />
-          <SettingsSidebar />
-          <main className="container mx-auto px-4 py-6 md:py-8 max-w-5xl">
-            {children}
-          </main>
-          <footer className="container mx-auto px-4 py-8 max-w-5xl text-center text-xs text-brand-700/60">
-            <div className="gold-rule mb-4 max-w-md mx-auto" />
-            Data sourced from alquran.cloud · Translation: Sahih International
-          </footer>
+          <div className="flex h-screen overflow-hidden bg-bg-primary">
+            <IconSidebar />
+            <SurahSidebar surahs={surahs} />
+            <main className="flex-1 overflow-y-auto relative">
+              {children}
+            </main>
+            <SettingsPanel />
+            <SearchModal />
+          </div>
         </SettingsProvider>
       </body>
     </html>

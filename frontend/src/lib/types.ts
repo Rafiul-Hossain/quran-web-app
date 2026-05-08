@@ -21,7 +21,11 @@ export interface SearchResult {
   surahNumber: number;
   surahName: string;
   surahEnglishName: string;
+  surahEnglishNameTranslation: string;
   ayahNumber: number;
+  ayahGlobalNumber: number;
   text: string;
   translation: string;
 }
+
+export type Theme = 'dark' | 'light';
