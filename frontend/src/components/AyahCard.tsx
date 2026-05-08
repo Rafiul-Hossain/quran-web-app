@@ -5,10 +5,6 @@ import { useSettings } from '@/context/SettingsContext';
 import { getFontClass, getAudioUrl } from '@/lib/constants';
 import type { Ayah } from '@/lib/types';
 
-function toArabicNumerals(n: number): string {
-  return String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[parseInt(d)]);
-}
-
 export function AyahCard({ ayah, surahNumber }: { ayah: Ayah; surahNumber: number }) {
   const { settings } = useSettings();
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -40,14 +36,12 @@ export function AyahCard({ ayah, surahNumber }: { ayah: Ayah; surahNumber: numbe
 
   return (
     <div id={`ayah-${ayah.numberInSurah}`} className="ayah-card bg-bg-card border border-border rounded-xl p-5 md:p-6 transition-all duration-200">
-      {/* Top row */}
-      <div className="flex items-center justify-between mb-5">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-icon-bg">
-            <span className="text-xs font-semibold text-accent">{ayah.numberInSurah}</span>
-          </div>
-          <span className="text-xs text-text-muted hidden sm:block">Verse {ayah.numberInSurah}</span>
-        </div>
+
+      {/* Top: ayah ref + play button */}
+      <div className="flex items-center justify-between mb-4">
+        <span className="text-sm font-semibold text-accent">
+          {surahNumber}:{ayah.numberInSurah}
+        </span>
 
         <button
           onClick={togglePlay}
@@ -77,22 +71,21 @@ export function AyahCard({ ayah, surahNumber }: { ayah: Ayah; surahNumber: numbe
 
       {error && <p className="text-xs text-red-400 mb-3 text-right">Audio unavailable</p>}
 
-      {/* Arabic */}
+      {/* Arabic text */}
       <p
         dir="rtl"
         style={{ fontSize: settings.arabicFontSize }}
         className={`${fontClass} text-right leading-loose text-text-primary mb-5`}
       >
         {ayah.text}
-        <span
-          className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-gold/40 text-gold mx-2 align-middle"
-          style={{ fontSize: 14 }}
-        >
-          ﴿{toArabicNumerals(ayah.numberInSurah)}﴾
-        </span>
       </p>
 
       <div className="w-full h-px bg-border mb-4" />
+
+      {/* Translation label */}
+      <p className="text-[10px] font-semibold tracking-widest text-text-muted uppercase mb-2">
+        Saheeh International
+      </p>
 
       {/* Translation */}
       <p style={{ fontSize: settings.translationFontSize }} className="text-text-secondary leading-relaxed">

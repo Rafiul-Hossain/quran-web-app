@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { SettingsProvider } from '@/context/SettingsContext';
-
-
 import { getAllSurahs } from '@/lib/quran';
 import type { SurahMeta } from '@/lib/types';
 import { SurahSidebar } from '@/components/SurahSidebar';
@@ -13,6 +11,7 @@ import { IconSidebar } from '@/components/IconSidebar';
 export const metadata: Metadata = {
   title: 'Quran — Read & Listen',
   description: 'Read and listen to the Holy Quran with English translation',
+  icons: { icon: '/favicon.ico' },
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

@@ -10,6 +10,7 @@ const config: Config = {
         scheherazade: ['"Scheherazade New"', 'serif'],
         'noto-naskh': ['"Noto Naskh Arabic"', 'serif'],
         'ibm-plex': ['"IBM Plex Sans"', 'sans-serif'],
+        kfgq: ['KFGQ', 'serif'],
       },
       colors: {
         'bg-primary': 'var(--bg-primary)',

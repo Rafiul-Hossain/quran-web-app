@@ -1,4 +1,9 @@
-/* Google Fonts — loaded at runtime */
+@font-face {
+  font-family: 'KFGQ';
+  src: url('https://cdn.jsdelivr.net/gh/thetruetruth/quran-data-kfgqpc@main/hafs/font/hafs.18.woff2') format('woff2');
+  font-display: swap;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
 
 @tailwind base;
@@ -27,6 +32,7 @@
     --font-scheherazade: 'Scheherazade New', serif;
     --font-noto-naskh: 'Noto Naskh Arabic', serif;
     --font-ibm-plex: 'IBM Plex Sans', sans-serif;
+    --font-kfgq: 'KFGQ', serif;
   }
 
   .dark {
@@ -60,31 +66,27 @@
   }
 }
 
-/* Font utility classes */
 .font-amiri { font-family: var(--font-amiri) !important; }
 .font-scheherazade { font-family: var(--font-scheherazade) !important; }
 .font-noto-naskh { font-family: var(--font-noto-naskh) !important; }
+.font-kfgq { font-family: var(--font-kfgq) !important; }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 9999px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
-/* Range sliders */
 input[type='range'] { -webkit-appearance: none; appearance: none; background: transparent; width: 100%; }
 input[type='range']::-webkit-slider-runnable-track { height: 4px; background: var(--border-color); border-radius: 9999px; }
 input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 9999px; background: var(--accent); margin-top: -6px; cursor: pointer; }
 input[type='range']::-moz-range-track { height: 4px; background: var(--border-color); border-radius: 9999px; }
 input[type='range']::-moz-range-thumb { height: 16px; width: 16px; border-radius: 9999px; background: var(--accent); border: none; cursor: pointer; }
 
-/* Ayah card hover */
 .ayah-card:hover {
   border-color: var(--accent);
   box-shadow: 0 0 0 1px var(--accent-glow), 0 4px 24px rgba(0, 0, 0, 0.12);
 }
 
-/* Playing pulse */
 @keyframes pulse-ring {
   0%   { box-shadow: 0 0 0 0 var(--accent-glow); }
   70%  { box-shadow: 0 0 0 8px transparent; }
@@ -92,9 +94,8 @@ input[type='range']::-moz-range-thumb { height: 16px; width: 16px; border-radius
 }
 .playing-pulse { animation: pulse-ring 1.5s ease-out infinite; }
 
-/* Bismillah */
 .bismillah-text {
-  font-family: var(--font-amiri);
+  font-family: var(--font-kfgq);
   direction: rtl;
   text-align: center;
   font-size: 2rem;
@@ -102,7 +103,6 @@ input[type='range']::-moz-range-thumb { height: 16px; width: 16px; border-radius
   line-height: 2;
 }
 
-/* Fade-in */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
