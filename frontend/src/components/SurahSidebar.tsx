@@ -42,7 +42,7 @@ export function SurahSidebar({ surahs }: { surahs: SurahMeta[] }) {
       <aside className={`
         flex flex-col w-72 flex-shrink-0 h-screen bg-bg-sidebar border-r border-border z-20
         transition-transform duration-300 fixed md:static top-0 left-0
-        ${isSurahSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+        ${isSurahSidebarOpen ? 'translate-x-14 md:translate-x-0' : '-translate-x-full md:translate-x-0'}
         ${!isSurahSidebarOpen ? 'md:hidden' : 'md:flex'}
       `}>
         {/* Header */}

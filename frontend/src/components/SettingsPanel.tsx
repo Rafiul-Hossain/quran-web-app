@@ -62,7 +62,7 @@ export function SettingsPanel() {
             <div className="flex justify-between text-xs text-text-muted mt-1">
               <span>{FONT_SIZES.arabic.min}px</span><span>{FONT_SIZES.arabic.max}px</span>
             </div>
-            <div dir="rtl" style={{ fontSize: settings.arabicFontSize }}
+            <div dir="rtl" style={{ fontSize: `${settings.arabicFontSize}px` }}
               className={`mt-3 p-3 rounded-lg bg-bg-card border border-border text-right text-gold leading-relaxed font-${settings.arabicFont}`}>
               بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
             </div>
@@ -75,7 +75,7 @@ export function SettingsPanel() {
             <div className="flex justify-between text-xs text-text-muted mt-1">
               <span>{FONT_SIZES.translation.min}px</span><span>{FONT_SIZES.translation.max}px</span>
             </div>
-            <p style={{ fontSize: settings.translationFontSize }}
+            <p style={{ fontSize: `${settings.translationFontSize}px` }}
               className="mt-3 p-3 rounded-lg bg-bg-card border border-border text-text-secondary leading-relaxed">
               In the name of Allah, the Entirely Merciful, the Especially Merciful.
             </p>

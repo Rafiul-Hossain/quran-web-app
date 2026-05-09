@@ -4,7 +4,7 @@ export function SurahHeader({ surah }: { surah: Surah }) {
   return (
     <div className="relative overflow-hidden rounded-2xl mb-8 border border-border bg-bg-card">
       {/* Kaaba image from ref site */}
-     
+    
 
       <div className="relative px-6 py-8 text-center">
         <h1

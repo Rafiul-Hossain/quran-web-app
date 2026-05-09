@@ -74,7 +74,7 @@ export function AyahCard({ ayah, surahNumber }: { ayah: Ayah; surahNumber: numbe
       {/* Arabic text */}
       <p
         dir="rtl"
-        style={{ fontSize: settings.arabicFontSize }}
+       style={{ fontSize: `${settings.arabicFontSize}px` }}
         className={`${fontClass} text-right leading-loose text-text-primary mb-5`}
       >
         {ayah.text}
@@ -88,7 +88,7 @@ export function AyahCard({ ayah, surahNumber }: { ayah: Ayah; surahNumber: numbe
       </p>
 
       {/* Translation */}
-      <p style={{ fontSize: settings.translationFontSize }} className="text-text-secondary leading-relaxed">
+      <p style={{ fontSize: `${settings.translationFontSize}px` }} className="text-text-secondary leading-relaxed">
         {ayah.translation}
       </p>
     </div>
