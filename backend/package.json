@@ -6,8 +6,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node init && node index.js",
+    "dev": "node init && nodemon index.js",
     "fetch-data": "node scripts/fetch-quran.js"
   },
   "dependencies": {

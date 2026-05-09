@@ -8,7 +8,7 @@ export interface FontOption {
 export const ARABIC_FONTS: FontOption[] = [
   { id: 'kfgq',         label: 'KFGQ (Uthmanic)',    className: 'font-kfgq',        preview: 'بِسْمِ اللَّهِ' },
   { id: 'amiri',        label: 'Amiri',               className: 'font-amiri',       preview: 'بِسْمِ اللَّهِ' },
-  { id: 'scheherazade', label: 'Scheherazade New',    className: 'font-scheherazade',preview: 'بِسْمِ اللَّهِ' },
+  { id: 'scheherazade', label: 'Scheherazade New',    className: 'font-scheherazade', preview: 'بِسْمِ اللَّهِ' },
   { id: 'noto-naskh',   label: 'Noto Naskh Arabic',  className: 'font-noto-naskh',  preview: 'بِسْمِ اللَّهِ' },
 ];
 
@@ -26,11 +26,9 @@ export interface AppSettings {
 }
 
 export const RECITERS = [
-  { id: 'ar.alafasy',            label: 'Mishary Alafasy' },
-  { id: 'ar.abdulbasitmurattal', label: 'Abdul Basit (Murattal)' },
-  { id: 'ar.abdullahbasfar',     label: 'Abdullah Basfar' },
-  { id: 'ar.hudhaify',           label: 'Ali Al-Hudhaify' },
-  { id: 'ar.minshawi',           label: 'Mohamed Minshawi' },
+  { id: 'ar.alafasy',    label: 'Mishary Alafasy' },
+  { id: 'ar.hudhaify',   label: 'Ali Al-Hudhaify' },
+  { id: 'ar.minshawi',   label: 'Mohamed Minshawi' },
 ];
 
 export const DEFAULT_SETTINGS: AppSettings = {
@@ -49,4 +47,14 @@ export function getFontClass(id: string): string {
 
 export function getAudioUrl(globalAyahNumber: number, reciter: string): string {
   return `https://cdn.islamic.network/quran/audio/128/${reciter}/${globalAyahNumber}.mp3`;
+}
+
+export function getFontFamily(id: string): string {
+  const map: Record<string, string> = {
+    'kfgq':         'KFGQ, serif',
+    'amiri':        'var(--font-amiri), serif',
+    'scheherazade': 'var(--font-scheherazade), serif',
+    'noto-naskh':   'var(--font-noto-naskh), serif',
+  };
+  return map[id] ?? 'var(--font-amiri), serif';
 }

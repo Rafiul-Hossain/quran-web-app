@@ -1,7 +1,7 @@
 'use client';
 
 import { useSettings } from '@/context/SettingsContext';
-import { ARABIC_FONTS, FONT_SIZES, RECITERS } from '@/lib/constants';
+import { ARABIC_FONTS, FONT_SIZES, RECITERS, getFontFamily } from '@/lib/constants';
 
 export function SettingsPanel() {
   const { isSettingsOpen, closeSettings, settings, updateSettings, resetSettings } = useSettings();
@@ -49,7 +49,13 @@ export function SettingsPanel() {
                   <span className={`text-sm font-medium ${settings.arabicFont === font.id ? 'text-accent' : 'text-text-secondary'}`}>
                     {font.label}
                   </span>
-                  <span className={`text-lg ${font.className} text-gold`} dir="rtl">{font.preview}</span>
+                  <span
+                    style={{ fontFamily: getFontFamily(font.id) }}
+                    className="text-lg text-gold"
+                    dir="rtl"
+                  >
+                    {font.preview}
+                  </span>
                 </button>
               ))}
             </div>
@@ -57,43 +63,72 @@ export function SettingsPanel() {
 
           {/* Arabic Font Size */}
           <Section title={`Arabic Font Size — ${settings.arabicFontSize}px`}>
-            <input type="range" min={FONT_SIZES.arabic.min} max={FONT_SIZES.arabic.max} step={FONT_SIZES.arabic.step}
-              value={settings.arabicFontSize} onChange={(e) => updateSettings({ arabicFontSize: Number(e.target.value) })} />
+            <input
+              type="range"
+              min={FONT_SIZES.arabic.min}
+              max={FONT_SIZES.arabic.max}
+              step={FONT_SIZES.arabic.step}
+              value={settings.arabicFontSize}
+              onChange={(e) => updateSettings({ arabicFontSize: Number(e.target.value) })}
+            />
             <div className="flex justify-between text-xs text-text-muted mt-1">
-              <span>{FONT_SIZES.arabic.min}px</span><span>{FONT_SIZES.arabic.max}px</span>
+              <span>{FONT_SIZES.arabic.min}px</span>
+              <span>{FONT_SIZES.arabic.max}px</span>
             </div>
-            <div dir="rtl" style={{ fontSize: `${settings.arabicFontSize}px` }}
-              className={`mt-3 p-3 rounded-lg bg-bg-card border border-border text-right text-gold leading-relaxed font-${settings.arabicFont}`}>
+            <div
+              dir="rtl"
+              style={{
+                fontSize: `${settings.arabicFontSize}px`,
+                fontFamily: getFontFamily(settings.arabicFont),
+              }}
+              className="mt-3 p-3 rounded-lg bg-bg-card border border-border text-right text-gold leading-relaxed"
+            >
               بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
             </div>
           </Section>
 
           {/* Translation Size */}
           <Section title={`Translation Size — ${settings.translationFontSize}px`}>
-            <input type="range" min={FONT_SIZES.translation.min} max={FONT_SIZES.translation.max} step={FONT_SIZES.translation.step}
-              value={settings.translationFontSize} onChange={(e) => updateSettings({ translationFontSize: Number(e.target.value) })} />
+            <input
+              type="range"
+              min={FONT_SIZES.translation.min}
+              max={FONT_SIZES.translation.max}
+              step={FONT_SIZES.translation.step}
+              value={settings.translationFontSize}
+              onChange={(e) => updateSettings({ translationFontSize: Number(e.target.value) })}
+            />
             <div className="flex justify-between text-xs text-text-muted mt-1">
-              <span>{FONT_SIZES.translation.min}px</span><span>{FONT_SIZES.translation.max}px</span>
+              <span>{FONT_SIZES.translation.min}px</span>
+              <span>{FONT_SIZES.translation.max}px</span>
             </div>
-            <p style={{ fontSize: `${settings.translationFontSize}px` }}
-              className="mt-3 p-3 rounded-lg bg-bg-card border border-border text-text-secondary leading-relaxed">
+            <p
+              style={{ fontSize: `${settings.translationFontSize}px` }}
+              className="mt-3 p-3 rounded-lg bg-bg-card border border-border text-text-secondary leading-relaxed"
+            >
               In the name of Allah, the Entirely Merciful, the Especially Merciful.
             </p>
           </Section>
 
           {/* Reciter */}
           <Section title="Reciter">
-            <select value={settings.reciter} onChange={(e) => updateSettings({ reciter: e.target.value })}
-              className="w-full px-3 py-2.5 rounded-lg border border-border bg-bg-card text-text-primary text-sm focus:outline-none focus:border-accent transition-colors">
-              {RECITERS.map((r) => <option key={r.id} value={r.id}>{r.label}</option>)}
+            <select
+              value={settings.reciter}
+              onChange={(e) => updateSettings({ reciter: e.target.value })}
+              className="w-full px-3 py-2.5 rounded-lg border border-border bg-bg-card text-text-primary text-sm focus:outline-none focus:border-accent transition-colors"
+            >
+              {RECITERS.map((r) => (
+                <option key={r.id} value={r.id}>{r.label}</option>
+              ))}
             </select>
           </Section>
         </div>
 
         {/* Footer */}
         <div className="px-5 py-4 border-t border-border">
-          <button onClick={resetSettings}
-            className="w-full py-2.5 rounded-lg border border-border text-text-secondary text-sm hover:border-accent hover:text-accent transition-colors">
+          <button
+            onClick={resetSettings}
+            className="w-full py-2.5 rounded-lg border border-border text-text-secondary text-sm hover:border-accent hover:text-accent transition-colors"
+          >
             Reset to Defaults
           </button>
         </div>
