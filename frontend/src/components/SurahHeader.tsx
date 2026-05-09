@@ -1,29 +1,33 @@
-import type { Surah } from '@/lib/types';
+import type { Surah } from "@/lib/types";
 
 export function SurahHeader({ surah }: { surah: Surah }) {
   return (
     <div className="relative overflow-hidden rounded-2xl mb-8 border border-border bg-bg-card">
-
       {/* Kaaba image from ref site */}
-      <div className="absolute top-0 left-0 w-48 h-48 opacity-20 pointer-events-none select-none">
-        <img src="/makkah.webp" alt="" className="w-full h-full object-contain" />
-      </div>
+     
 
       <div className="relative px-6 py-8 text-center">
         <h1
           className="font-kfgq text-gold mb-3 leading-none"
-          style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}
+          style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)" }}
           dir="rtl"
         >
           {surah.name}
         </h1>
-        <p className="text-xl font-semibold text-text-primary">{surah.englishName}</p>
-        <p className="text-sm text-text-secondary mt-0.5 mb-4">{surah.englishNameTranslation}</p>
+        <p className="text-xl font-semibold text-text-primary">
+          {surah.englishName}
+        </p>
+        <p className="text-sm text-text-secondary mt-0.5 mb-4">
+          {surah.englishNameTranslation}
+        </p>
         <div className="flex items-center justify-center gap-3 flex-wrap">
           {[
-            ['📍', surah.revelationType],
-            ['📖', `${surah.numberOfAyahs ?? surah.ayahs?.length ?? '?'} Verses`],
-            ['🔢', `Surah ${surah.number}`],
+            ["📍", surah.revelationType],
+            [
+              "📖",
+              `${surah.numberOfAyahs ?? surah.ayahs?.length ?? "?"} Verses`,
+            ],
+            ["🔢", `Surah ${surah.number}`],
           ].map(([icon, label]) => (
             <span
               key={label}
