@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { useSettings } from '@/context/SettingsContext';
-import { getFontClass, getAudioUrl } from '@/lib/constants';
+import { getAudioUrl, getFontFamily } from '@/lib/constants';
 import type { Ayah } from '@/lib/types';
 
 export function AyahCard({ ayah, surahNumber }: { ayah: Ayah; surahNumber: number }) {
@@ -12,7 +12,6 @@ export function AyahCard({ ayah, surahNumber }: { ayah: Ayah; surahNumber: numbe
   const [loading, setLoading] = useState(false);
   const [error, setError]     = useState(false);
 
-  const fontClass = getFontClass(settings.arabicFont);
   const audioUrl  = getAudioUrl(ayah.number, settings.reciter);
 
   const togglePlay = () => {
@@ -74,8 +73,11 @@ export function AyahCard({ ayah, surahNumber }: { ayah: Ayah; surahNumber: numbe
       {/* Arabic text */}
       <p
         dir="rtl"
-       style={{ fontSize: `${settings.arabicFontSize}px` }}
-        className={`${fontClass} text-right leading-loose text-text-primary mb-5`}
+        style={{ 
+          fontSize: `${settings.arabicFontSize}px`,
+          fontFamily: getFontFamily(settings.arabicFont)
+        }}
+        className="text-right leading-loose text-text-primary mb-5"
       >
         {ayah.text}
       </p>

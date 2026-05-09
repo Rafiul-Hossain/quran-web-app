@@ -4,8 +4,6 @@
   font-display: swap;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -28,10 +26,6 @@
     --icon-bg: #eef7f2;
     --active-bg: #2b7a4b;
     --active-text: #ffffff;
-    --font-amiri: 'Amiri', serif;
-    --font-scheherazade: 'Scheherazade New', serif;
-    --font-noto-naskh: 'Noto Naskh Arabic', serif;
-    --font-ibm-plex: 'IBM Plex Sans', sans-serif;
     --font-kfgq: 'KFGQ', serif;
   }
 
